@@ -20,10 +20,14 @@ def load_map():
 
 
 def update():
-    update_button = driver.find_element_by_class_name("_1MCHh")
-    update_button.click()
-    while update_button.get_attribute('class') != "_1MCHh":
-        time.sleep(0.05)
+    try:
+        update_button = driver.find_element_by_class_name("_1MCHh")
+        update_button.click()
+        while update_button.get_attribute('class') != "_1MCHh":
+            time.sleep(0.05)
+        return True
+    except:
+        return False
 
 
 def is_there_vaccine():
@@ -55,7 +59,8 @@ def give_me():
     while True:
         load_map()
         for i in range(300):
-            update()
+            if not update():
+                continue;
             if is_there_vaccine():
                 if reservation() == True:
                     driver.get_screenshot_as_file(str(time.ctime) + ".png")
