@@ -68,4 +68,29 @@ def give_me():
                     print("   " + str(time.ctime()))
 
 
+def one_hospital(key='JnAlmsIokZAgbo9'):
+    while True:
+        driver.get('https://v-search.nid.naver.com/reservation/info?key=' + key)
+        for i in range(300):
+            is_there_vaccine_one_hospital()
+        try:
+            driver.find_element_by_xpath('//*[@id="reservation_confirm"]')
+        except:
+            driver.get_screenshot_as_file(str(time.ctime) + ".png")
+            print("Screenshot Saved")
+            print("   " + str(time.ctime()))
+
+
+def is_there_vaccine_one_hospital():
+    while True:
+        try:
+            reservation_button = driver.find_element_by_xpath('//*[@id="reservation_confirm"]')
+        except:
+            time.sleep(0.01)
+        reservation_button.click()
+        break
+
+
 login()
+
+
