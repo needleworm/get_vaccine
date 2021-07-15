@@ -52,14 +52,15 @@ def reservation():
 
 
 def give_me():
-    load_map()
     while True:
-        update()
-        if is_there_vaccine():
-            if reservation() == True:
-                driver.get_screenshot_as_file(str(time.ctime) + ".png")
-                print("Screenshot Saved")
-                print("   " + str(time.ctime()))
+        load_map()
+        for i in range(300):
+            update()
+            if is_there_vaccine():
+                if reservation() == True:
+                    driver.get_screenshot_as_file(str(time.ctime) + ".png")
+                    print("Screenshot Saved")
+                    print("   " + str(time.ctime()))
 
 
 login()
