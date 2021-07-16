@@ -63,12 +63,12 @@ def give_me():
                 continue;
             if is_there_vaccine():
                 if reservation() == True:
-                    driver.get_screenshot_as_file(str(time.ctime) + ".png")
+                    driver.get_screenshot_as_file(str(time.ctime()) + ".png")
                     print("Screenshot Saved")
                     print("   " + str(time.ctime()))
 
 
-def one_hospital(key='JnAlmsIokZAgbo9'):
+def one_hospital(key='JUnxTruwhXPbf6M'):
     while True:
         driver.get('https://v-search.nid.naver.com/reservation/info?key=' + key)
         for i in range(300):
@@ -76,7 +76,7 @@ def one_hospital(key='JnAlmsIokZAgbo9'):
         try:
             driver.find_element_by_xpath('//*[@id="reservation_confirm"]')
         except:
-            driver.get_screenshot_as_file(str(time.ctime) + ".png")
+            driver.get_screenshot_as_file(str(time.ctime()) + ".png")
             print("Screenshot Saved")
             print("   " + str(time.ctime()))
 
