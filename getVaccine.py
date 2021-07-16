@@ -43,7 +43,7 @@ def is_there_vaccine():
 
 def reservation():
     clicked = False
-    for i in range(5):
+    for i in range(1):
         try:
             reservation_button = driver.find_element_by_xpath('//*[@id="reservation_confirm"]')
         except:
@@ -63,7 +63,8 @@ def give_me():
                 continue;
             if is_there_vaccine():
                 if reservation() == True:
-                    driver.get_screenshot_as_file(str(time.ctime()) + ".png")
+                    driver.get_screenshot_as_file(time.strftime('%Y-%m-%d %I:%M:%S') + ".png")
+                    time.sleep(2)
                     print("Screenshot Saved")
                     print("   " + str(time.ctime()))
 
@@ -76,7 +77,8 @@ def one_hospital(key='JUnxTruwhXPbf6M'):
         try:
             driver.find_element_by_xpath('//*[@id="reservation_confirm"]')
         except:
-            driver.get_screenshot_as_file(str(time.ctime()) + ".png")
+            driver.get_screenshot_as_file(time.strftime('%Y-%m-%d %I:%M:%S') + ".png")
+            time.sleep(2)
             print("Screenshot Saved")
             print("   " + str(time.ctime()))
 
