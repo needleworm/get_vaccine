@@ -1,7 +1,9 @@
 from selenium import webdriver
 import time
+import random
 
 driver = webdriver.Chrome("chromedriver.exe")
+trial = 0
 
 def login():
     driver.get("https://nid.naver.com/nidlogin.login?url=https://v-search.nid.naver.com/reservation?orgCd%3D12335843%26sid%3D31059094")
@@ -21,6 +23,7 @@ def load_map():
 
 def update():
     try:
+        time.sleep(random.random() / 2)
         update_button = driver.find_element_by_class_name("_1MCHh")
         update_button.click()
         while update_button.get_attribute('class') != "_1MCHh":
@@ -63,8 +66,10 @@ def give_me():
                 continue;
             if is_there_vaccine():
                 if reservation() == True:
-                    driver.get_screenshot_as_file(time.strftime('%Y-%m-%d %I:%M:%S') + ".png")
+                    trial += 1
                     time.sleep(2)
+                    driver.get_screenshot_as_file(str(trial) + ".png")
+                    time.sleep(3)
                     print("Screenshot Saved")
                     print("   " + str(time.ctime()))
 
@@ -72,12 +77,12 @@ def give_me():
 def one_hospital(key='JUnxTruwhXPbf6M'):
     while True:
         driver.get('https://v-search.nid.naver.com/reservation/info?key=' + key)
-        for i in range(300):
-            is_there_vaccine_one_hospital()
+        is_there_vaccine_one_hospital()
         try:
             driver.find_element_by_xpath('//*[@id="reservation_confirm"]')
         except:
-            driver.get_screenshot_as_file(time.strftime('%Y-%m-%d %I:%M:%S') + ".png")
+            trial += 1
+            driver.get_screenshot_as_file(str(trial) + ".png")
             time.sleep(2)
             print("Screenshot Saved")
             print("   " + str(time.ctime()))
